@@ -90,6 +90,7 @@ export default function BikePage() {
       {spec && (
         <Box
           bg="rgba(255,255,255,.04)"
+          color="black"
           border="1px solid rgba(255,255,255,.08)"
           borderRadius="2xl"
           p={5}
@@ -98,7 +99,7 @@ export default function BikePage() {
           <Heading size="md" mb={3}>
             Specs
           </Heading>
-          <Divider borderColor="whiteAlpha.300" mb={3} />
+          <Divider borderColor="blackAlpha.1" mb={3} />
           <Stack spacing={2}>
             {spec.frame && (
               <Text>
