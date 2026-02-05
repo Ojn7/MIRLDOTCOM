@@ -1,23 +1,31 @@
-import dotenv from "dotenv";
-dotenv.config(); // load env FIRST
-
 import express from "express";
-import { connectDB } from "./config/db.js";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Loads MIRLDOTCOM/.env (one level above /backend)
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+import bikeRoutes from "./routes/bikes.js";
 
 const app = express();
-const PORT = process.env.PORT || 5100;
+app.use(cors());
+app.use(express.json());
 
-// simple route
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
+
+app.use("/api/bikes", bikeRoutes);
+
 app.get("/", (req, res) => {
-  res.send("Server is ready");
+  res.send("MIRLDOTCOM Bicycle API running");
 });
 
-// connect to DB BEFORE starting the server
-const startServer = async () => {
-  await connectDB();
-  app.listen(PORT, () => {
-    console.log(`✅ Server started at http://localhost:${PORT}`);
-  });
-};
-
-startServer();
+app.listen(4000, () => console.log("Server running on port 4000"));
