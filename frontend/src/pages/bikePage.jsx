@@ -63,7 +63,8 @@ export default function BikePage() {
         />
       </Box>
 
-      <Heading mb={2}>{name}</Heading>
+      <Heading mb={2}  color="blackAlpha.900">{name}
+      </Heading>
       <Stack
         direction={{ base: "column", md: "row" }}
         spacing={4}
@@ -82,7 +83,7 @@ export default function BikePage() {
         )}
       </Stack>
 
-      <Text color="whiteAlpha.800" mb={6}>
+      <Text color="blackAlpha.800" mb={6}>
         {description}
       </Text>
 
